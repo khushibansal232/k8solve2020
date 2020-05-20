@@ -1,0 +1,22 @@
+
+#Create a a pod file q7.yaml and pod name adhocpod7
+kubectl run adhocpod7 --image=alpine --dry-run -o yaml
+kubectl run adhocpod7 --image=alpine --dry-run -o yaml  >q7.yaml
+gedit q7.yaml
+#neccesary changes to q7.yaml file
+#chanege label adhoc:khushiq7
+#go to spec  and create a volume of name vol123
+#create a emtyDir: {}
+#now,mount the path with this command /mnt/date.txt
+#run this  command :     command: ["/bin/sh","-c","while true ; do date  >>/mnt/date.txt/adhocoutput.txt;sleep 2;done"]
+# saving q7.yaml file:
+#run these commands
+kubectl apply -f q7.yaml
+kubectl get po
+kubectl get po -o wide
+#executing the peocess
+kubectl exec -it adhocpod7 sh
+#inside the pod do
+ls
+cd mnt/date.txt/adhocoutput.txt
+# and after this store the o/p to output.txt
