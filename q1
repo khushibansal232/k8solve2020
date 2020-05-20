@@ -1,0 +1,38 @@
+##create docker file name adhochttpd.dockerfile 
+# docker file
+FROM centos
+MAINTAINER  khushi khushijain7355@gmail.com 
+ENV x=app
+RUN yum  install  httpd  -y 
+RUN mkdir  /myapps
+WORKDIR  /myapps
+COPY  .   .   
+RUN  chmod +x  start.sh 
+EXPOSE 80
+ENTRYPOINT  /bin/bash /myapps/start.sh
+
+# start.sh 
+#!/bin/bash
+
+if [  "$x" == "app1"  ]
+then
+    cp -r  beginner-html-site-styled/.  /var/www/html/
+    httpd  -DFOREGROUND 
+
+elif   [  "$x" == "app2"  ]
+then
+    cp -r project-html-website/.  /var/www/html/
+    httpd  -DFOREGROUND 
+
+else 
+echo "Page Not Found" > /var/www/html/index.html
+    httpd  -DFOREGROUND 
+fi
+
+##run container for this app  x=app1
+docker run -d --name khushi_test5 -p 3560:80 -e x=app1 khushi232/may2020q1:v1
+
+##Run Container for this app x=app2:
+docker run -d --name khushi_tett6 -p 3230:80 -e x=app2 khushi232/may2020q1:v1
+
+
