@@ -1,0 +1,7 @@
+# creating the q2.yaml file by using following commands
+kubectl run adhocpod1 --image=nginx --port 80 --dry-run=client -o yaml > q2.yaml
+kubectl create service nodeport q2svcchinmay --tcp 80 --dry-run=client -o yaml >> q2.yaml
+#creating pod and running service by using following
+kubectl create -f q2.yaml
+
+# q2.yaml is attached
